@@ -24,16 +24,17 @@ public class PrivateNetworkCorsFilter implements Filter {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
 
-        httpResponse.setHeader("Access-Control-Allow-Origin", "https://studious-carnival-wgjprg4rqw725g96-5173.app.github.dev");
+        httpResponse.setHeader("Access-Control-Allow-Origin", "https://fluffy-space-fortnight-647q94pvgjqf47j7-5173.app.github.dev");
         httpResponse.setHeader("Access-Control-Allow-Credentials", "true");
         httpResponse.setHeader("Access-Control-Allow-Private-Network", "true");
-        httpResponse.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
         httpResponse.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Requested-With, Accept");
 
         if ("OPTIONS".equalsIgnoreCase(httpRequest.getMethod())) {
+            httpResponse.setHeader("Access-Control-Allow-Private-Network", "true");
             httpResponse.setStatus(HttpServletResponse.SC_OK);
             return;
         }
+
         chain.doFilter(request, response);
     }
 }
