@@ -1,10 +1,9 @@
 import React, { useEffect, useState, useRef } from "react";
-import { useLocation } from "react-router-dom";
 import { Client } from "@stomp/stompjs";
+import { useUsername } from "../context/UsernameContext";
 
 const Chat = ({ groupId }) => {
-    const location = useLocation();
-    const [username] = useState(location.state?.username || `user${Math.floor(1000 + Math.random() * 9000)}`); // Nome padrão, caso não venha do estado
+    const { username } = useUsername();
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState("");
     const client = useRef(null);
