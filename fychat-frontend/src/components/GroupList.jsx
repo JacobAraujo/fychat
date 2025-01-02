@@ -26,8 +26,8 @@ const GroupList = () => {
                         key={group.id}
                         className="px-4 py-2 border-b border-gray-200 hover:bg-gray-100 transition duration-200"
                     >
-                        <Link to={`/chat/${group.id}`} className="text-blue-600 hover:underline">
-                            {group.groupName}
+                        <Link to={`/chat/${group.linkToken}`} className="text-blue-600 hover:underline">
+                            {group.chatName}
                         </Link>
                     </li>
                 ))}

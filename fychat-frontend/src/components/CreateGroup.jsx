@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
-const CreateGroup = ({ onGroupCreated }) => {
+const CreateGroup = () => {
     const [groupName, setGroupName] = useState("");
     const [isPublic, setIsPublic] = useState(false);
+    const [groupLink, setGroupLink] = useState("");
 
     const handleCreateGroup = async () => {
         if (!groupName.trim()) {
@@ -11,7 +13,7 @@ const CreateGroup = ({ onGroupCreated }) => {
         }
 
         try {
-            const response = await fetch("http://localhost:8080/api/chat/groups", {
+            const response = await fetch(`http://localhost:8080/api/chat/groups`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -19,13 +21,28 @@ const CreateGroup = ({ onGroupCreated }) => {
                 body: JSON.stringify({
                     chatName: groupName,
                     chatType: isPublic,
-                }), 
+                }),
             });
 
+            if (!response.ok) {
+                throw new Error("Erro ao criar o grupo.");
+            }
+
             const data = await response.json();
-            onGroupCreated(data);
+            const baseURL = window.location.origin;
+            setGroupLink(`${baseURL}/chat/${data.linkToken}`);
         } catch (error) {
             console.error("Erro ao criar grupo:", error);
+        }
+    };
+
+    const handleCopyLink = () => {
+        if (groupLink) {
+            navigator.clipboard.writeText(groupLink).then(() => {
+                alert("Link copiado para a área de transferência!");
+            }).catch(() => {
+                alert("Erro ao copiar o link.");
+            });
         }
     };
 
@@ -55,6 +72,23 @@ const CreateGroup = ({ onGroupCreated }) => {
                 >
                     Criar Grupo
                 </button>
+                {groupLink && (
+                    <div className="mt-4 p-4 bg-blue-100 rounded">
+                        <p className="text-blue-800">Grupo criado com sucesso!</p>
+                        <Link
+                            to={groupLink.replace(`${window.location.origin}`, "")}
+                            className="block text-blue-500 underline mb-2"
+                        >
+                            Acesse seu grupo aqui
+                        </Link>
+                        <button
+                            onClick={handleCopyLink}
+                            className="w-full px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition duration-300 shadow-lg transform hover:scale-105"
+                        >
+                            Copiar Link
+                        </button>
+                    </div>
+                )}
             </div>
         </div>
     );
