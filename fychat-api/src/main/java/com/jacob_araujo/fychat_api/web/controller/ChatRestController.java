@@ -26,8 +26,9 @@ public class ChatRestController {
     }
 
     @GetMapping("/public-groups")
-    public List<Chat> getPublicGroups() {
-        return chatService.getPublicGroups();
+    public List<ChatResponseDto> getPublicGroups() {
+        List<Chat> chats = chatService.getPublicGroups();
+        return ChatMapper.toListDto(chats);
     }
 }
 

@@ -9,9 +9,9 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class ChatWebSocketController {
 
-    @MessageMapping("/sendMessage/{groupId}")
-    @SendTo("/topic/group/{groupId}")
-    public Message sendMessage(@DestinationVariable Long groupId, Message message) {
+    @MessageMapping("/sendMessage/{tokenLink}")
+    @SendTo("/topic/group/{tokenLink}")
+    public Message sendMessage(@DestinationVariable String tokenLink , Message message) {
         message.setTimestamp(java.time.LocalDateTime.now());
         return message;
     }

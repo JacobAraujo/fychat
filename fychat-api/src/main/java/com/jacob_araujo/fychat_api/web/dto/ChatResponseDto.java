@@ -8,6 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 public class ChatResponseDto {
-    private Long id;
+    private String id;
     private String chatName;
+    private String linkToken;
 }
