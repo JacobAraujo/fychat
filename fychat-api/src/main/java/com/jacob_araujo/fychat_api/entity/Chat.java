@@ -24,6 +24,9 @@ public class Chat {
     @Column(name = "group_name")
     private String groupName;
 
+    @Column(name = "link_token", nullable = false, length = 255)
+    private String linkToken;
+
     @CreatedDate
     private LocalDateTime createdAt;
 

@@ -7,19 +7,20 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class ChatService {
     @Autowired
     private ChatRepository chatRepository;
 
-    public Chat createGroup(String groupName, Boolean groupType, LocalDateTime expiresAt) {
-        Chat group = new Chat();
-        group.setGroupName(groupName);
-        group.setChatType(groupType ? Chat.ChatType.PUBLIC : Chat.ChatType.PRIVATE);
-        group.setCreatedAt(LocalDateTime.now());
-        group.setExpiresAt(expiresAt);
-        System.out.println(group);
+    public Chat createGroup(Chat group) {
+
+        String linkToken = UUID.randomUUID().toString();
+        group.setLinkToken(linkToken);
+
+        group.setExpiresAt(LocalDateTime.now().plusHours(1));
+
         return chatRepository.save(group);
     }
 
