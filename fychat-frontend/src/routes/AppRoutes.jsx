@@ -4,6 +4,7 @@ import HomePage from "../pages/HomePage";
 import CreateGroup from "../components/CreateGroup";
 import GroupList from "../components/GroupList";
 import Chat from "../components/Chat";
+import PerfilSetup from "../pages/PerfilSetup";
 
 function AppRoutes() {
     return (
@@ -11,14 +12,15 @@ function AppRoutes() {
             <Route path="/" element={<HomePage />} />
             <Route path="/create-group" element={<CreateGroup />} />
             <Route path="/public-groups" element={<GroupList />} />
-            <Route path="/chat/:groupId" element={<ChatWrapper />} />
+            <Route path="/chat/:tokenLink" element={<ChatWrapper />} />
+            <Route path="/setup-perfil" element={<PerfilSetup />} />
         </Routes>
     );
 }
 
 const ChatWrapper = () => {
-    const { groupId } = useParams();
-    return <Chat groupId={groupId} />;
+    const { tokenLink } = useParams();
+    return <Chat tokenLink={tokenLink} />;
 };
 
 export default AppRoutes;
