@@ -16,8 +16,6 @@ public class ChatService {
 
     public Chat createGroup(Chat group) {
 
-        System.out.println(group);
-
         String linkToken = UUID.randomUUID().toString();
         group.setLinkToken(linkToken);
 

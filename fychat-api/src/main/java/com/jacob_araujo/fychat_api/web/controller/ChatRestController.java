@@ -20,7 +20,6 @@ public class ChatRestController {
 
     @PostMapping("/groups")
     public ResponseEntity<ChatResponseDto> create(@RequestBody ChatCreateDto dto) {
-        System.out.println(dto);
         Chat group = ChatMapper.toChat(dto);
         Chat groupCreated = chatService.createGroup(group);
         return ResponseEntity.ok(ChatMapper.toDto(groupCreated));
