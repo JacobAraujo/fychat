@@ -3,7 +3,10 @@ package com.jacob_araujo.fychat_api.web.controller;
 import com.jacob_araujo.fychat_api.entity.Chat;
 import com.jacob_araujo.fychat_api.service.ChatService;
 import com.jacob_araujo.fychat_api.web.dto.ChatCreateDto;
+import com.jacob_araujo.fychat_api.web.dto.ChatResponseDto;
+import com.jacob_araujo.fychat_api.web.dto.mapper.ChatMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,8 +19,11 @@ public class ChatRestController {
     private ChatService chatService;
 
     @PostMapping("/groups")
-    public Chat createGroup(@RequestBody ChatCreateDto dto) {
-        return chatService.createGroup(dto.getChatName(), dto.getChatType(), dto.getExpiresAt());
+    public ResponseEntity<ChatResponseDto> create(@RequestBody ChatCreateDto dto) {
+        System.out.println(dto);
+        Chat group = ChatMapper.toChat(dto);
+        Chat groupCreated = chatService.createGroup(group);
+        return ResponseEntity.ok(ChatMapper.toDto(groupCreated));
     }
 
     @GetMapping("/public-groups")
