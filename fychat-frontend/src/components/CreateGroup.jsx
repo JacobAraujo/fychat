@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const CreateGroup = ({ onGroupCreated }) => {
+const CreateGroup = () => {
     const [groupName, setGroupName] = useState("");
     const [isPublic, setIsPublic] = useState(false);
 
@@ -22,8 +22,6 @@ const CreateGroup = ({ onGroupCreated }) => {
                 }), 
             });
 
-            const data = await response.json();
-            onGroupCreated(data);
         } catch (error) {
             console.error("Erro ao criar grupo:", error);
         }
