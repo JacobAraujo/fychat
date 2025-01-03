@@ -5,14 +5,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
 @Getter @Setter @NoArgsConstructor @ToString
 @Entity
-@EntityListeners(AuditingEntityListener.class)
+@Table(name = "chats")
 public class Chat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,11 +25,11 @@ public class Chat {
     @Column(name = "link_token", nullable = false, length = 255)
     private String linkToken;
 
-    @CreatedDate
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
     @Column(name = "expires_at")
-    private LocalDateTime expiresAt = LocalDateTime.now().plusHours(1);
+    private LocalDateTime expiresAt;
 
     public enum ChatType {
         PRIVATE, PUBLIC

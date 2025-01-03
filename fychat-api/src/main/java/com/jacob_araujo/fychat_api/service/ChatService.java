@@ -19,6 +19,7 @@ public class ChatService {
         String linkToken = UUID.randomUUID().toString();
         group.setLinkToken(linkToken);
 
+        group.setCreatedAt(LocalDateTime.now());
         group.setExpiresAt(LocalDateTime.now().plusHours(1));
 
         return chatRepository.save(group);
