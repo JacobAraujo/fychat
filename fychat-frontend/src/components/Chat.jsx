@@ -22,9 +22,11 @@ const Chat = ({ tokenLink }) => {
     useEffect(() => {
         if (loading) return; 
 
+        const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
         client.current = new Client();
         client.current.configure({
-            brokerURL: "ws://localhost:8080/ws",
+            brokerURL: `ws://${API_BASE_URL}/ws`,
             onConnect: () => {
                 client.current.subscribe(`/topic/group/${tokenLink}`, (message) => {
                     const receivedMessage = JSON.parse(message.body);

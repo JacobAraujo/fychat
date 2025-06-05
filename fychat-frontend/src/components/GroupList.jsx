@@ -4,8 +4,10 @@ import { Link } from "react-router-dom";
 const GroupList = () => {
     const [groups, setGroups] = useState([]);
 
+    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
     useEffect(() => {
-        fetch("http://localhost:8080/api/chat/public-groups", {
+        fetch(`http://${API_BASE_URL}/api/chat/public-groups`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
