@@ -15,7 +15,7 @@ public class CorsConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("https://fluffy-space-fortnight-647q94pvgjqf47j7-5173.app.github.dev"));
+        config.setAllowedOrigins(List.of("https://fychat.site", "https://www.fychat.site"));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
         config.addExposedHeader("Access-Control-Allow-Private-Network");
